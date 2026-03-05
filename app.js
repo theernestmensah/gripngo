@@ -303,6 +303,29 @@ function handleNewsletter(e) {
 }
 
 /* ──────────────────────────────────────────────────
+   17. CONTACT EMAIL FORM HANDLER
+────────────────────────────────────────────────── */
+function handleContactEmail(e) {
+  e.preventDefault();
+  const btn = document.getElementById('cfSubmitBtn');
+  const btnText = document.getElementById('cfBtnText');
+  const success = document.getElementById('cfSuccess');
+
+  btnText.textContent = 'Sending...';
+  btn.disabled = true;
+  gsap.to(btn, { scale: 0.97, duration: 0.1, yoyo: true, repeat: 1 });
+
+  setTimeout(() => {
+    const form = document.getElementById('contactEmailForm');
+    gsap.to(form.querySelectorAll('.row > div'), { opacity: 0, y: -10, duration: 0.3, stagger: 0.04 });
+    setTimeout(() => {
+      success.style.display = 'block';
+      gsap.from(success, { y: 16, opacity: 0, duration: 0.6, ease: 'expo.out' });
+    }, 400);
+  }, 1100);
+}
+
+/* ──────────────────────────────────────────────────
    INIT EVERYTHING
 ────────────────────────────────────────────────── */
 window.addEventListener('DOMContentLoaded', () => {
